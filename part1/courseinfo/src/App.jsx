@@ -13,16 +13,29 @@ const App = () => {
   ];
 
   const [selected, setSelected] = useState(0);
+  const [votes, setVotes] = useState([0, 0, 0, 0, 0, 0, 0, 0]);
+
+  const handleVotes = () => {
+    const votesCopy = [...votes];
+    votesCopy[selected] += 1;
+    setVotes(votesCopy);
+  };
 
   const handleClick = () => {
     const randomAnecdote = Math.floor(Math.random() * anecdotes.length);
     setSelected(randomAnecdote);
   };
 
+  const copy = [...votes];
+  // increment the value in position 2 by one
+  copy[2] += 1;
+
   return (
     <div>
       <div>{anecdotes[selected]}</div>
+      <p>has {votes[selected]} votes</p>
       <div>
+        <button onClick={handleVotes}>vote</button>
         <button onClick={handleClick}>next anecdote</button>
       </div>
     </div>
