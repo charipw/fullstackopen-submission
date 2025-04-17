@@ -26,18 +26,21 @@ const App = () => {
     setSelected(randomAnecdote);
   };
 
-  const copy = [...votes];
-  // increment the value in position 2 by one
-  copy[2] += 1;
+  const maxVotes = Math.max(...votes);
+  const maxIndex = votes.indexOf(maxVotes);
 
   return (
     <div>
+      <h1>Anecdote of the day</h1>
       <div>{anecdotes[selected]}</div>
       <p>has {votes[selected]} votes</p>
       <div>
         <button onClick={handleVotes}>vote</button>
         <button onClick={handleClick}>next anecdote</button>
       </div>
+      <h1>Anecdote with most votes</h1>
+      <div>{anecdotes[maxIndex]}</div>
+      <p>has {maxVotes} votes</p>
     </div>
   );
 };
