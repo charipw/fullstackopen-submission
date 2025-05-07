@@ -21,23 +21,18 @@ const Content = (props) => {
 };
 
 const Total = (props) => {
-  return (
-    <b>
-      total of{" "}
-      {props.parts[0].exercises +
-        props.parts[1].exercises +
-        props.parts[2].exercises +
-        props.parts[3].exercises}{" "}
-      exercices
-    </b>
-  );
+  var result = 0;
+  for (var i = 0; i < props.parts.length; i++) {
+    result += props.parts[i].exercises;
+  }
+  return <b>total of {result} exercices</b>;
 };
 
 const Course = ({ course }) => (
   <div>
     <Header course={course} />
     <Content parts={course.parts} />
-    {/* <Total parts={course.parts} /> */}
+    <Total parts={course.parts} />
   </div>
 );
 
