@@ -21,11 +21,13 @@ const Content = (props) => {
 };
 
 const Total = (props) => {
-  var result = 0;
-  for (var i = 0; i < props.parts.length; i++) {
-    result += props.parts[i].exercises;
-  }
-  return <b>total of {result} exercices</b>;
+  const initialValue = 0;
+  const sumWithInitial = props.parts.reduce(
+    (accumulator, part) => accumulator + part.exercises,
+    initialValue
+  );
+
+  return <b>total of {sumWithInitial} exercices</b>;
 };
 
 const Course = ({ course }) => (
