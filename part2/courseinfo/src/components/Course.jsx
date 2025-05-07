@@ -13,10 +13,9 @@ const Part = (props) => {
 const Content = (props) => {
   return (
     <div>
-      <Part name={props.parts[0].name} number={props.parts[0].exercises} />
-      <Part name={props.parts[1].name} number={props.parts[1].exercises} />
-      <Part name={props.parts[2].name} number={props.parts[2].exercises} />
-      <Part name={props.parts[3].name} number={props.parts[2].exercises} />
+      {props.parts.map((part) => {
+        return <Part key={part.id} name={part.name} number={part.exercises} />;
+      })}
     </div>
   );
 };
@@ -38,7 +37,7 @@ const Course = ({ course }) => (
   <div>
     <Header course={course} />
     <Content parts={course.parts} />
-    <Total parts={course.parts} />
+    {/* <Total parts={course.parts} /> */}
   </div>
 );
 
