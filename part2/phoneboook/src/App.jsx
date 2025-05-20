@@ -1,4 +1,7 @@
 import { useState } from "react";
+import Filter from "./components/Filter";
+import PersonForm from "./components/PersonForm";
+import Persons from "./components/Persons";
 
 const App = () => {
   const [persons, setPersons] = useState([
@@ -39,8 +42,6 @@ const App = () => {
   let personsToShow = persons;
 
   if (searchString != "") {
-    // only show the persons's name that contains the searchString
-    // console.log("Persons to show");
     personsToShow = persons.filter((person) =>
       person.name.toUpperCase().includes(searchString.toUpperCase())
     );
@@ -49,31 +50,19 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
-      <div>
-        filter shown with{" "}
-        <input value={searchString} onChange={handleSearchStringChange} />
-      </div>
-      <h2>add a new</h2>
-      <form onSubmit={addName}>
-        <div>
-          name: <input value={newName} onChange={handleNameChange} />
-        </div>
-        <div>
-          number: <input value={newNumber} onChange={handleNumberChange} />
-        </div>
+      <Filter value={searchString} onChange={handleSearchStringChange} />
 
-        <div>
-          <button type="submit">add</button>
-        </div>
-      </form>
+      <h2>add a new</h2>
+      <PersonForm
+        onSubmit={addName}
+        name={newName}
+        number={newNumber}
+        onNameChange={handleNameChange}
+        onNumberChange={handleNumberChange}
+      />
+
       <h2>Numbers</h2>
-      <div>
-        {personsToShow.map((person, index) => (
-          <div key={index}>
-            {person.name} {person.number}
-          </div>
-        ))}
-      </div>
+      <Persons persons={personsToShow} />
     </div>
   );
 };
